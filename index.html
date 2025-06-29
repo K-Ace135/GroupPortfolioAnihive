@@ -345,50 +345,38 @@
     }
     .project-screenshots {
   display: flex;
-  gap: 1.5rem;
-  justify-content: center;
+  flex-direction: column;
+  gap: 2.3rem;
   margin-top: 2rem;
-  flex-wrap: wrap;
+  width: 100%;
+  align-items: stretch;
 }
 .project-screenshot {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.17);
   border: 1.5px solid #ecebfc;
   border-radius: 1rem;
   box-shadow: 0 4px 16px rgba(108,99,255,0.11);
   overflow: hidden;
-  width: 300px;
-  max-width: 95vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  margin-bottom: 1rem;
-  min-height: 340px; /* adjust as needed */
-  position: relative;
+  align-items: center;
 }
-
 .project-screenshot img {
   width: 100%;
-  max-height: 240px;    /* or adjust as needed */
-  object-fit: contain;  /* makes sure image never stretches */
-  flex: 1 1 auto;
-  background: #f6f6ff;
+  max-height: 480px;
+  object-fit: contain;
   display: block;
+  background: #fff;
+  border-bottom: 1px solid #eee;
 }
-
 .project-screenshot p {
-  margin: 0;
+  margin: 0.7rem 0 1rem 0;
   font-size: 1rem;
   color: #444;
   text-align: center;
-  padding: .75rem 0 .85rem 0;
-  min-height: 48px; /* visually balanced */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Absolute positioning to force it to the bottom if you want (optional): */
-  /* position: absolute; bottom: 0; left: 0; width: 100%; */
 }
+
 .project-title {
   font-size: 1.6rem;
   font-weight: 800;
@@ -620,8 +608,9 @@
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <a href="#" class="logo"><i class="fa-solid fa-people-group"></i><span>Team APES</span></a>
     <nav>
+    
+      <a href="#"><i class="fa-solid fa-house"></i>Home</a>
       <a href="#team"><i class="fa-solid fa-user-group"></i>Team</a>
       <a href="#project"><i class="fa-solid fa-rocket"></i>Project</a>
       <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
@@ -632,7 +621,11 @@
     <div class="header-glass">
       <div class="header-content">
         <h1 style="color: #6c63ff;"><i class="fa-solid fa-people-group"></i> Team APES</h1>
-        <div class="motto">"Apes together strong."</div>
+        <a href="#" class="motto" id="apes-motto" style="text-decoration:none; color: white; cursor:pointer;">
+  "Apes together strong."
+</a>
+<audio id="apes-audio" src="apes-strong.mp3" preload="auto"></audio>
+
         <div class="location"><i class="fa-solid fa-location-dot"></i> Bangkok, Thailand</div>
       </div>
     </div>
@@ -700,15 +693,16 @@
   </div>
   <!-- screenshots stay here -->
   <div class="project-screenshots">
-    <div class="project-screenshot">
-      <img src="anihive-frontend-1.png" alt="AniHive Frontend Screenshot">
-      <p>Frontend – Home Page</p>
-    </div>
-    <div class="project-screenshot">
-      <img src="anihive-db.png" alt="AniHive Database Diagram">
-      <p>Database Design Diagram</p>
-    </div>
+  <div class="project-screenshot">
+    <img src="anihive-frontend-1.png" alt="AniHive Frontend Screenshot">
+    <p>Frontend – Home Page</p>
   </div>
+  <div class="project-screenshot">
+    <img src="anihive-db.png" alt="AniHive Database Diagram">
+    <p>Database Design Diagram</p>
+  </div>
+</div>
+
 </section>
 
     <!-- Contact Section -->
@@ -725,11 +719,16 @@
     </section>
   </div>
   <div class="bottom-line">
-    We’re not just classmates — we’re a unit.<br>
-    When we say <span>“Apes together strong,”</span> we mean it.
-  </div>
+  We’re not just classmates — we’re a unit.<br>
+  When we say 
+  <a href="#" class="apes-quote" style="text-decoration:none; color:var(--accent); font-weight:700; letter-spacing:1.1px; cursor:pointer;">
+    “Apes together strong,”
+  </a>
+  we mean it.
+</div>
+
   <footer style="text-align:center; color:#888; padding:1.3rem 1rem 1.2rem 1rem; font-size:.97rem">
-    © 2025 Team APES
+    © 2025 Team APES. All Rights Reserved.
   </footer>
   <!-- Intersection Observer for fade/slide in -->
   <script>
@@ -798,6 +797,24 @@
       }
     });
   });
+  // --- Play audio when motto is clicked ---
+document.addEventListener("DOMContentLoaded", function() {
+  var idsOrClasses = ['apes-motto', 'apes-quote'];
+  var audio = document.getElementById('apes-audio');
+  idsOrClasses.forEach(function(idOrClass) {
+    // Try get by id first, if not, querySelector for class
+    var el = document.getElementById(idOrClass) || document.querySelector('.' + idOrClass);
+    if (el && audio) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        audio.currentTime = 0;
+        audio.play();
+      });
+    }
+  });
+});
+
+
   </script>
 </body>
 </html>
