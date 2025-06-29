@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Team APES – Group Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --accent: #6c63ff;
+      --bg: #f7f7fa;
+      --text: #222;
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(108,99,255,0.18);
+      --glass-shadow: 0 8px 32px 0 rgba(31,38,135,0.11);
+      --radius: 1.2rem;
+      --main-maxwidth: 1000px;
+    }
+    html, body { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    /* NAVIGATION BAR */
+    .navbar {
+      position: fixed;
+      top: 2.1rem;
+      right: 2.4rem;
+      left: auto;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(16px) saturate(1.12);
+      border-radius: 2.5rem;
+      box-shadow: 0 3px 24px rgba(108,99,255,0.06);
+      padding: .47rem 1.7rem .47rem 1.05rem;
+      border: 1.7px solid var(--glass-border);
+      gap: 1.25rem;
+      font-size: 1.11rem;
+      transition: background 0.18s;
+    }
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+    .navbar .logo i {
+      font-size: 1.22rem;
+      color: var(--accent);
+    }
+    .navbar nav {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      margin-left: 1.5rem;
+    }
+    .navbar nav a {
+      color: #454545;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.06rem;
+      padding: .18rem .78rem;
+      border-radius: 1.1rem;
+      transition: background 0.15s, color 0.17s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .navbar nav a:hover, .navbar nav a.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    @media (max-width: 700px) {
+      .navbar {
+        top: 1.1rem;
+        right: 1rem;
+        left: auto;
+        transform: none;
+        font-size: 0.99rem;
+        gap: .95rem;
+        padding: .33rem 1.15rem .33rem 0.71rem;
+      }
+      .navbar nav { margin-left: 0.7rem; }
+      .navbar .logo span { display:none;}
+    }
+    /* HEADER FULLSCREEN HERO */
+    .header-bg {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      min-height: 480px;
+      background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .header-glass {
+      background: rgba(255,255,255,0.15);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--radius);
+      backdrop-filter: blur(18px) saturate(1.2);
+      -webkit-backdrop-filter: blur(18px) saturate(1.2);
+      padding: 2.6rem 2rem 2.4rem 2rem;
+      text-align: center;
+      z-index: 1;
+      width: 100%;
+      max-width: 530px;
+      border: 1.7px solid var(--glass-border);
+      position: relative;
+    }
+    .header-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.21) 0%, rgba(0,0,0,0.36) 100%);
+      z-index: 0;
+    }
+    .header-content h1 {
+      margin: 0 0 .6rem 0;
+      font-size: 2.6rem;
+      color: #fff;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.2);
+      letter-spacing: 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .header-content .motto {
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: 500;
+      margin-bottom: .7rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+    .header-content .location {
+      color: #f5f6fa;
+      font-size: 1.07rem;
+      font-weight: 400;
+      margin-bottom: 0;
+      opacity: 0.87;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.13);
+    }
+    @media (max-width: 600px) {
+      .header-glass { max-width: 98vw; padding: 1.1rem 0.2rem 1.1rem 0.2rem; }
+      .header-bg { min-height: 350px; height: 70vh;}
+      .header-content h1 { font-size: 1.48rem;}
+    }
+    /* Shared main content wrapper */
+    .main-content-wrap {
+      max-width: var(--main-maxwidth);
+      margin: 2.7rem auto 0 auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    /* --------- TEAM CARDS ----------- */
+    .section {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .section-title {
+      font-size: 1.45rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      text-align: left;
+    }
+    .team-list {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: nowrap;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .team-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--glass-bg);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--radius);
+      padding: 2.2rem 1.4rem 1.5rem 1.4rem;
+      min-width: 250px;
+      max-width: 300px;
+      width: 100%;
+      border: 2px solid var(--glass-border);
+      backdrop-filter: blur(15px) saturate(1.22);
+      -webkit-backdrop-filter: blur(15px) saturate(1.22);
+      transition: box-shadow 0.22s cubic-bezier(.4,2.4,.9,.6), border-color 0.16s, transform 0.20s, backdrop-filter 0.21s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(60px);
+      text-decoration: none !important;
+      color: inherit;
+    }
+    .team-card:visited, .team-card:active { color: inherit; }
+    .team-card.visible { 
+      opacity: 1; 
+      transform: translateY(0); 
+      transition: opacity 0.8s, transform 0.7s; 
+    }
+    .team-card:hover {
+      box-shadow: 0 10px 36px 0 rgba(108,99,255,0.20);
+      border-color: var(--accent);
+      transform: translateY(-13px) scale(1.032);
+      backdrop-filter: blur(26px) saturate(1.35);
+      -webkit-backdrop-filter: blur(26px) saturate(1.35);
+      text-decoration: none;
+    }
+    .team-card .icon {
+      font-size: 2.1rem;
+      margin-bottom: 0.36rem;
+      color: var(--accent);
+    }
+    .team-card h3 {
+      margin: 0 0 0.38rem 0;
+      font-size: 1.14rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .team-card .role {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: .97rem;
+      margin-bottom: .25rem;
+      text-transform: uppercase;
+      letter-spacing: .9px;
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .team-card .skills {
+      font-size: .96rem;
+      color: #3e3e5b;
+      margin-bottom: .6rem;
+      font-weight: 500;
+      text-align: center;
+    }
+    .team-card .bio {
+      font-size: .98rem;
+      color: #353554;
+      text-align: center;
+      margin-bottom: .2rem;
+      line-height: 1.53;
+    }
+    @media (max-width: 700px) {
+      .team-list {
+        flex-direction: column;
+        align-items: center;
+      }
+      .team-card {
+        max-width: 400px;
+        min-width: 0;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+    }
+      /* -------- PROJECT GLASS BOX ---------- */
+    .project-box {
+      background: var(--glass-bg);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--radius);
+      padding: 2.3rem 2rem 2.1rem 2rem;
+      border: 2px solid var(--glass-border);
+      backdrop-filter: blur(13px) saturate(1.2);
+      -webkit-backdrop-filter: blur(13px) saturate(1.2);
+      margin: 0 0 2.5rem 0;
+      width: 100%;
+      max-width: var(--main-maxwidth);
+      box-sizing: border-box;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s, transform 0.7s;
+    }
+    .project-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-title {
+      font-size: 1.35rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+    .project-desc {
+      font-size: 1.11rem;
+      margin-bottom: 1rem;
+      color: #21213c;
+      text-align: center;
+    }
+    .project-stack {
+      color: #555;
+      font-size: .97rem;
+      margin-bottom: .6rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+    .project-roles {
+      font-size: 1.01rem;
+      color: #393969;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      font-weight: 500;
+    }
+    .project-features {
+      font-size: .98rem;
+      color: #333;
+      margin-bottom: .4rem;
+      text-align: center;
+    }
+    .project-screenshots {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+.project-screenshot {
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid #ecebfc;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(108,99,255,0.11);
+  overflow: hidden;
+  width: 300px;
+  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  min-height: 340px; /* adjust as needed */
+  position: relative;
+}
+
+.project-screenshot img {
+  width: 100%;
+  max-height: 240px;    /* or adjust as needed */
+  object-fit: contain;  /* makes sure image never stretches */
+  flex: 1 1 auto;
+  background: #f6f6ff;
+  display: block;
+}
+
+.project-screenshot p {
+  margin: 0;
+  font-size: 1rem;
+  color: #444;
+  text-align: center;
+  padding: .75rem 0 .85rem 0;
+  min-height: 48px; /* visually balanced */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Absolute positioning to force it to the bottom if you want (optional): */
+  /* position: absolute; bottom: 0; left: 0; width: 100%; */
+}
+.project-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 1.2px;
+  text-align: center;
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+.project-desc {
+  font-size: 1.13rem;
+  color: #21213c;
+  margin: 0 0 1.25rem 0;
+  text-align: center;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.project-stack-row {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  justify-content: center;
+  margin-bottom: 1.1rem;
+  font-size: 1.02rem;
+}
+.stack-label {
+  color: #444;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.stack-items {
+  color: #6c6a80;
+  font-weight: 400;
+}
+.project-roles-group {
+  margin-bottom: 1.3rem;
+  text-align: center;
+}
+.project-roles-title {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1.08rem;
+  margin-bottom: .4rem;
+  letter-spacing: .5px;
+}
+.project-roles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  font-size: 1rem;
+  color: #1a1a2a;
+  font-weight: 500;
+}
+.project-roles-list span {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  justify-content: center;
+  font-weight: 400;
+}
+.project-features-row {
+  display: flex;
+  align-items: center;
+  gap: .42rem;
+  color: #38385b;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  justify-content: center;
+}
+
+/* Modal Styles */
+.img-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  overflow: auto;
+  background: rgba(10,10,18,0.86);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation: fadeIn .25s;
+}
+
+.img-modal-content {
+  max-width: 92vw;
+  max-height: 80vh;
+  display: block;
+  margin: 40px auto 0 auto;
+  border-radius: 0.7rem;
+  box-shadow: 0 8px 40px rgba(30,30,50,0.24);
+  background: #fff;
+}
+
+.img-modal-caption {
+  color: #eee;
+  margin: 18px auto 0 auto;
+  text-align: center;
+  font-size: 1.09rem;
+  max-width: 85vw;
+  line-height: 1.6;
+}
+
+.img-modal-close {
+  color: #fff;
+  position: absolute;
+  top: 20px; right: 38px;
+  font-size: 2.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color .2s;
+  z-index: 5;
+}
+.img-modal-close:hover { color: #f44336; }
+
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+/* --- Project Screenshot Hover Effect --- */
+.project-screenshot {
+  transition: box-shadow .18s, transform .16s, border-color .17s;
+  cursor: pointer;
+}
+.project-screenshot:hover {
+  box-shadow: 0 8px 38px rgba(108,99,255,0.28), 0 2px 8px rgba(0,0,0,0.07);
+  border-color: var(--accent);
+  transform: translateY(-8px) scale(1.025);
+}
+
+
+    /* ----- CONTACT GLASS ----- */
+    .contact-box {
+      background: var(--glass-bg);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.2rem;
+      border: 2px solid var(--glass-border);
+      backdrop-filter: blur(11px) saturate(1.1);
+      -webkit-backdrop-filter: blur(11px) saturate(1.1);
+      margin: 0 0 2.7rem 0;
+      width: 100%;
+      max-width: var(--main-maxwidth);
+      box-sizing: border-box;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s, transform 0.7s;
+    }
+    .contact-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .contact-title {
+      color: var(--accent);
+      font-size: 1.11rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      margin-bottom: .7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+    }
+    .contact-links a {
+      display: inline-block;
+      margin: 0 10px 7px 10px;
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      background: rgba(255,255,255,0.28);
+      padding: 0.32rem 1rem;
+      border-radius: .47rem;
+      border: 1px solid #ecebfc;
+      transition: background 0.17s, color 0.18s, border 0.18s;
+    }
+    .contact-links a:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    @media (max-width: 1100px) {
+      .main-content-wrap,
+      .project-box,
+      .contact-box {
+        max-width: 98vw;
+        padding: 0.7rem;
+      }
+    }
+    @media (max-width: 700px) {
+      .team-list {
+        flex-direction: column;
+        align-items: center;
+      }
+      .team-card {
+        max-width: 400px;
+        min-width: 0;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      .project-box, .contact-box { max-width: 99vw;}
+      .main-content-wrap { padding: 0.4rem;}
+    }
+    @media (max-width: 600px) {
+      .section { padding: .6rem;}
+      .project-box, .contact-box { padding: .8rem .2rem .7rem .2rem;}
+    }
+    /* Bottom ending line */
+    .bottom-line {
+      color: #444;
+      font-size: 1.05rem;
+      letter-spacing: .4px;
+      text-align: center;
+      padding: 2.5rem 1rem 2.7rem 1rem;
+      opacity: 0.92;
+      font-weight: 500;
+    }
+    .bottom-line span {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 1.1px;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <a href="#" class="logo"><i class="fa-solid fa-people-group"></i><span>Team APES</span></a>
+    <nav>
+      <a href="#team"><i class="fa-solid fa-user-group"></i>Team</a>
+      <a href="#project"><i class="fa-solid fa-rocket"></i>Project</a>
+      <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
+    </nav>
+  </div>
+  <!-- Hero/Header -->
+  <div class="header-bg">
+    <div class="header-glass">
+      <div class="header-content">
+        <h1 style="color: #6c63ff;"><i class="fa-solid fa-people-group"></i> Team APES</h1>
+        <div class="motto">"Apes together strong."</div>
+        <div class="location"><i class="fa-solid fa-location-dot"></i> Bangkok, Thailand</div>
+      </div>
+    </div>
+  </div>
+  <div class="main-content-wrap">
+    <!-- Team Members Section -->
+    <section class="section" id="team">
+      <div class="section-title"><i class="fa-solid fa-user-group"></i> Team Members</div>
+      <div class="team-list">
+        <a href="https://nwayoopyaezo.github.io/nwayoopyaezo-portfolio/" target="_blank" class="team-card fade-slide">
+          <div class="icon"><i class="fa-solid fa-database"></i></div>
+          <h3>NwayOo</h3>
+          <div class="role"><i class="fa-solid fa-database"></i> Database Manager</div>
+          <div class="skills"><b>Skills:</b> SQL, Excel, Power BI</div>
+          <div class="bio">
+            The analytical mind of the team.<br>
+            As our data-focused ape, she structures, optimizes, and visualizes data to keep everything running efficiently behind the scenes.
+          </div>
+        </a>
+        <a href="https://k-ace135.github.io/KaunGportfolio/" target="_blank" class="team-card fade-slide">
+          <div class="icon"><i class="fa-solid fa-code"></i></div>
+          <h3>KaunG</h3>
+          <div class="role"><i class="fa-solid fa-desktop"></i> Frontend Developer</div>
+          <div class="skills"><b>Skills:</b> HTML, CSS, Java, JavaScript</div>
+          <div class="bio">
+            The design-forward ape of the crew.<br>
+            Crafts clean, responsive interfaces with thoughtful code — turning every layout into a user-friendly experience.
+          </div>
+        </a>
+        <a href="https://ye-portfolio.vercel.app/" target="_blank" class="team-card fade-slide">
+          <div class="icon"><i class="fa-solid fa-clipboard-list"></i></div>
+          <h3>Sayar Ye</h3>
+          <div class="role"><i class="fa-solid fa-pen-ruler"></i> Office Tools Specialist</div>
+          <div class="skills"><b>Skills:</b> Microsoft Office Tools (Word, Excel, PowerPoint)</div>
+          <div class="bio">
+            The strategic support ape.<br>
+            Translates ideas into clear documents and engaging presentations, helping the team stay sharp, structured, and professional.
+          </div>
+        </a>
+      </div>
+    </section>
+        <section class="project-box fade-slide" id="project">
+  <div class="project-title"><i class="fa-solid fa-rocket"></i>Project - AniHive</div>
+  <div class="project-desc">
+    An anime and J-pop themed e-commerce platform for figures, goods, music, and more.
+  </div>
+  <div class="project-stack-row">
+    <span class="stack-label">
+      <i class="fa-solid fa-layer-group"></i>
+      <b>Tech Stack:</b>
+    </span>
+    <span class="stack-items">SQL Server, HTML/CSS, JavaScript, Excel, Power BI</span>
+  </div>
+  <div class="project-roles-group">
+    <div class="project-roles-title">Team Roles</div>
+    <div class="project-roles-list">
+      <span><i class="fa-solid fa-database"></i> DB Design & Data – <b>NwayOo</b></span>
+      <span><i class="fa-solid fa-desktop"></i> Frontend – <b>KaunG</b></span>
+      <span><i class="fa-solid fa-pen-ruler"></i> Docs – <b>Sayar Ye</b></span>
+    </div>
+  </div>
+  <div class="project-features-row">
+    <i class="fa-solid fa-folder"></i>
+    <span>Includes product categories, fandom tagging, multi-image support, and admin tools.</span>
+  </div>
+  <!-- screenshots stay here -->
+  <div class="project-screenshots">
+    <div class="project-screenshot">
+      <img src="anihive-frontend-1.png" alt="AniHive Frontend Screenshot">
+      <p>Frontend – Home Page</p>
+    </div>
+    <div class="project-screenshot">
+      <img src="anihive-db.png" alt="AniHive Database Diagram">
+      <p>Database Design Diagram</p>
+    </div>
+  </div>
+</section>
+
+    <!-- Contact Section -->
+    <section class="contact-box fade-slide" id="contact">
+      <div class="contact-title"><i class="fa-solid fa-envelope"></i> Contact</div>
+      <div>
+        You can reach us via our team GitHub (if available) or individually:
+      </div>
+      <div class="contact-links" style="margin-top: 1.1rem;">
+        <a href="https://github.com/NwayOoPyaeZo" target="_blank"><i class="fa-brands fa-github"></i> NwayOo</a>
+        <a href="https://github.com/K-Ace135" target="_blank"><i class="fa-brands fa-github"></i> KaunG</a>
+        <a href="https://www.facebook.com/uncleye.uncleye.37" target="_blank"><i class="fa-solid fa-envelope"></i> Sayar Ye</a>
+      </div>
+    </section>
+  </div>
+  <div class="bottom-line">
+    We’re not just classmates — we’re a unit.<br>
+    When we say <span>“Apes together strong,”</span> we mean it.
+  </div>
+  <footer style="text-align:center; color:#888; padding:1.3rem 1rem 1.2rem 1rem; font-size:.97rem">
+    © 2025 Team APES
+  </footer>
+  <!-- Intersection Observer for fade/slide in -->
+  <script>
+    function onVisible(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+      const observer = new window.IntersectionObserver(onVisible, {
+        threshold: 0.18
+      });
+      document.querySelectorAll('.fade-slide, .project-box, .contact-box').forEach(el => {
+        observer.observe(el);
+      });
+      // Smooth scroll for navbar links
+      document.querySelectorAll('.navbar nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href').replace('#','');
+          const target = document.getElementById(targetId);
+          if (target) {
+            e.preventDefault();
+            window.scrollTo({top: target.getBoundingClientRect().top + window.scrollY - 40, behavior:'smooth'});
+          }
+        });
+      });
+    });
+     // Modal logic
+  document.addEventListener("DOMContentLoaded", function() {
+
+    // Modal
+    const modal = document.getElementById("img-modal");
+    const modalImg = document.getElementById("img-modal-img");
+    const modalCaption = document.getElementById("img-modal-caption");
+    const closeBtn = document.querySelector(".img-modal-close");
+
+    document.querySelectorAll(".project-screenshot img").forEach(img => {
+      img.addEventListener("click", function() {
+        modal.style.display = "flex";
+        modalImg.src = this.src;
+        modalImg.alt = this.alt;
+        modalCaption.innerText = this.closest('.project-screenshot').querySelector("p")?.innerText || '';
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    closeBtn.onclick = function() {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+    };
+    modal.onclick = function(e) {
+      // Close modal if clicked outside the image
+      if(e.target === modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+      }
+    };
+    // ESC key to close
+    window.addEventListener("keydown", function(e){
+      if(e.key === "Escape" && modal.style.display === "flex") {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+      }
+    });
+  });
+  </script>
+</body>
+</html>
