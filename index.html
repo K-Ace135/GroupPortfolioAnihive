@@ -588,6 +588,19 @@
       .section { padding: .6rem;}
       .project-box, .contact-box { padding: .8rem .2rem .7rem .2rem;}
     }
+    @media (max-width: 700px) {
+  .navbar nav a span {
+    display: none;
+  }
+  .navbar nav a i {
+    font-size: 1.28em;
+    margin: 0; /* Optional: adjust spacing for icons only */
+  }
+  .navbar nav {
+    gap: 0.8rem;
+  }
+}
+
     /* Bottom ending line */
     .bottom-line {
       color: #444;
@@ -608,14 +621,14 @@
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <nav>
-    
-      <a href="#"><i class="fa-solid fa-house"></i>Home</a>
-      <a href="#team"><i class="fa-solid fa-user-group"></i>Team</a>
-      <a href="#project"><i class="fa-solid fa-rocket"></i>Project</a>
-      <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
-    </nav>
-  </div>
+  <nav>
+    <a href="#"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a href="#team"><i class="fa-solid fa-user-group"></i><span>Team</span></a>
+    <a href="#project"><i class="fa-solid fa-rocket"></i><span>Project</span></a>
+    <a href="#contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+  </nav>
+</div>
+
   <!-- Hero/Header -->
   <div class="header-bg">
     <div class="header-glass">
